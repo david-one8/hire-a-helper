@@ -1,8 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import toast from 'react-hot-toast'
 import Button from '@/components/ui/Button'
@@ -10,6 +11,7 @@ import Input from '@/components/ui/Input'
 
 export default function LoginPage() {
   const router = useRouter()
+  const searchParams = useSearchParams()
   const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState({
     email: '',
@@ -33,9 +35,17 @@ export default function LoginPage() {
 
       if (result?.error) {
         toast.error(result.error)
+        setLoading(false)
+        return
+      }
+
+      // If email not verified, go to OTP page with email param
+      if (!result.data.emailVerified) {
+        router.push(`/verify-otp?email=${encodeURIComponent(formData.email)}`)
       } else {
-        toast.success('Login successful!')
-        router.push('/verify-otp')
+        // Fully verified, go to dashboard
+        router.push('/feed')
+        toast.success('Welcome back!')
       }
     } catch (error) {
       toast.error('Something went wrong')
