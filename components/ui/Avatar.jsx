@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { cn } from '@/lib/utils'
 
 export default function Avatar({ src, alt, size = 'md' }) {
@@ -11,7 +12,7 @@ export default function Avatar({ src, alt, size = 'md' }) {
   return (
     <div className={cn('rounded-full bg-gradient-to-br from-primary-500 to-secondary-500 flex items-center justify-center text-white font-semibold overflow-hidden', sizes[size])}>
       {src ? (
-        <img src={src} alt={alt} className="w-full h-full object-cover" />
+        <Image src={src} alt={alt} className="w-full h-full object-cover" fill sizes="100%" priority />
       ) : (
         <span>{alt?.[0]?.toUpperCase() || 'U'}</span>
       )}
