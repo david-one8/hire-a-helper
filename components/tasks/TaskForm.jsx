@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useMutation } from '@tanstack/react-query'
 import { useDropzone } from 'react-dropzone'
@@ -111,9 +112,11 @@ export default function TaskForm() {
           </label>
           {picture ? (
             <div className="relative">
-              <img 
+              <Image 
                 src={URL.createObjectURL(picture)} 
                 alt="Preview" 
+                width={500}
+                height={200}
                 className="w-full h-48 object-cover rounded-lg"
               />
               <button
