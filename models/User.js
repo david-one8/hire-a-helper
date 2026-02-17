@@ -11,6 +11,8 @@ const UserSchema = new Schema(
     bio: { type: String },
     otp: { type: String },
     otpExpiresAt: { type: Date },
+    resetOtp: { type: String },
+    resetOtpExpiresAt: { type: Date },
     emailVerified: { type: Boolean, default: false },
   },
   { timestamps: true }
