@@ -44,7 +44,7 @@ export default function RegisterPage() {
       })
 
       toast.success('Registration successful! Please verify your email.')
-      router.push('/verify-otp?email=' + formData.email)
+      router.push('/verify-otp?email=' + encodeURIComponent(formData.email))
     } catch (error) {
       toast.error(error.response?.data?.message || 'Registration failed')
     } finally {
