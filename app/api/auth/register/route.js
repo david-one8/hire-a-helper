@@ -16,8 +16,9 @@ export async function POST(request) {
       return NextResponse.json({ message: 'Email already registered' }, { status: 400 })
     }
 
-    const hashed = await hash(password, 10)
+    const hashedPassword = await hash(password, 10)
     const otp = crypto.randomInt(100000, 999999).toString()
+    const hashedOtp = await hash(otp, 6)
     const otpExpiresAt = new Date(Date.now() + 10 * 60 * 1000)
 
     const user = await User.create({
@@ -25,8 +26,8 @@ export async function POST(request) {
       lastName,
       email,
       phoneNumber,
-      password: hashed,
-      otp,
+      password: hashedPassword,
+      otp: hashedOtp,
       otpExpiresAt,
       emailVerified: false,
     })
