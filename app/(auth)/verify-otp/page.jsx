@@ -54,8 +54,8 @@ export default function VerifyOTPPage() {
         otp: otpCode,
       })
 
-      toast.success('Email verified successfully!')
-      router.push('/feed')
+      toast.success('Email verified! Please sign in.')
+      router.push('/login')
     } catch (error) {
       toast.error(error.response?.data?.message || 'Invalid OTP')
     } finally {
