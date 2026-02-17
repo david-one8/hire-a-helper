@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import axios from 'axios'
 import toast from 'react-hot-toast'
@@ -32,9 +33,11 @@ export default function TaskCard({ task, showRequestButton, isOwner }) {
   return (
     <Card className="group hover:shadow-lg transition-shadow">
       {task.picture && (
-        <img 
+        <Image 
           src={task.picture} 
           alt={task.title}
+          width={400}
+          height={192}
           className="w-full h-48 object-cover rounded-lg mb-4"
         />
       )}
